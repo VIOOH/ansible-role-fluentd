@@ -26,15 +26,6 @@
     group: "{{ fluentd_group }}"
     mode: 0755
 
-- name: FLUENTD | Copy server config
-  template:
-    src: "{{ fluentd_playbook_templates_path }}/fluent.conf.j2"
-    dest: "{{ fluentd_conf_path }}/fluent.conf"
-    owner: "{{ fluentd_user }}"
-    group: "{{ fluentd_group }}"
-    mode: 0644
-  notify: restart fluentd
-
 - name: Configure Fluentd.
   template:
     src: td-agent.conf.j2
