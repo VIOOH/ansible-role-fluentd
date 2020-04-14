@@ -1,4 +1,12 @@
 ---
+#### installation variables ####
+fluentd_user: fluentd
+fluentd_group: fluentd
+fluentd_conf_path: "/etc/fluent"
+fluentd_log_path: "/var/log/fluent"
+fluentd_log_rotate: "--log-rotate-age daily"
+fluentd_log_file: "{{ fluentd_log_path }}/fluent.log"
+
 fluentd_package_state: present
 
 fluentd_service_name: td-agent
