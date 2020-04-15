@@ -1,7 +1,7 @@
 ---
 #### installation variables ####
-fluentd_user: fluentd
-fluentd_group: fluentd
+fluentd_user: td-agent
+fluentd_group: td-agent
 fluentd_conf_path: "/etc/td-agent"
 fluentd_log_path: "/var/log/td-agent"
 fluentd_log_rotate: "--log-rotate-age daily"
