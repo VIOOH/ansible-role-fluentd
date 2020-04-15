@@ -10,14 +10,6 @@
     name: td-agent
     state: "{{ fluentd_package_state }}"
 
-- name: FLUENTD | Create server conf path
-  file:
-    path: "{{ fluentd_conf_path }}"
-    state: directory
-    owner: "{{ fluentd_user }}"
-    group: "{{ fluentd_group }}"
-    mode: 0755
-
 - name: FLUENTD | Create log path
   file:
     path: "{{ fluentd_log_path }}"
