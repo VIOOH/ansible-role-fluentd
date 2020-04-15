@@ -29,7 +29,7 @@
 - name: FLUENTD | Copy server config
   template:
     src: "{{ fluentd_playbook_templates_path }}/fluent.conf.j2"
-    dest: "{{ fluentd_conf_path }}/tg-agent.conf"
+    dest: "{{ fluentd_conf_path }}/td-agent.conf"
     owner: "{{ fluentd_user }}"
     group: "{{ fluentd_group }}"
     mode: 0644
@@ -38,7 +38,7 @@
 - name: Configure Fluentd.
   template:
     src: td-agent.conf.j2
-    dest: /etc/td-agent/td-agent.conf
+    dest: /lib/systemd/system/td-agent.service
     owner: "{{ fluentd_user }}"
     group: "{{ fluentd_group }}"
     mode: 0644
