@@ -2,6 +2,6 @@
 
 - name: restart fluentd
   systemd:
-    name: {{ fluentd_service_name }}
+    name: td-agent
     state: restarted
   when: fluentd_service_state != 'stopped'
