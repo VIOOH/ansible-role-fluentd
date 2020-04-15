@@ -54,7 +54,8 @@
   with_items: "{{ fluentd_plugins }}"
 
 - name: Start Fluentd.
-  service:
+  systemd:
     name: "{{ fluentd_service_name }}"
     state: "{{ fluentd_service_state }}"
     enabled: "{{ fluentd_service_enabled }}"
+    daemon_reload: yes
