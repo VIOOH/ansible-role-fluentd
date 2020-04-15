@@ -1,4 +1,7 @@
 ---
+
 - name: restart fluentd
-  service: name={{ fluentd_service_name }} state=restarted
+  systemd:
+    name: {{ fluentd_service_name }}
+    state: restarted
   when: fluentd_service_state != 'stopped'
