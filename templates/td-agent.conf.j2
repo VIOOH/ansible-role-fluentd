@@ -1,3 +1,18 @@
+[Unit]
+Description=Fluentd
+After=network.target
+
+[Service]
+Type=forking
+PIDFile=/run/td-agent/td-agent.pid
+RuntimeDirectory=td-agent
+
+User={{ fluentd_user }}
+Group={{ fluentd_group }}
+
+[Install]
+WantedBy=multi-user.target
+
 ####
 ## Source descriptions:
 ##
