@@ -10,7 +10,7 @@ RuntimeDirectory=td-agent
 User={{ fluentd_user }}
 Group={{ fluentd_group }}
 
-ExecStart=/usr/sbin/td-agent -d /run/td-agent/td-agent.pid -c {{ fluentd_conf_path }}/fluent.conf -o {{ fluentd_log_file }}
+ExecStart=/usr/sbin/td-agent -d /run/td-agent/td-agent.pid -c {{ fluentd_conf_path }}/td-agent.conf -o {{ fluentd_log_file }}
 ExecStop=/usr/bin/kill -9 $MAINPID
 Restart=always
 
