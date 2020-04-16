@@ -5,8 +5,8 @@ fluentd_group: td-agent
 fluentd_conf_path: "/etc/td-agent"
 fluentd_log_path: "/var/log/td-agent"
 fluentd_log_rotate: "--log-rotate-age daily"
-fluentd_log_file: "{{ fluentd_log_path }}/fluent.log"
-fluentd_playbook_templates_path: "{{ playbook_dir }}/templates"
+fluentd_log_file: "{{ fluentd_log_path }}/td-agent.log"
+fluentd_playbook_templates_path: "{{ playbook_dir }}/templates/fluentd"
 
 fluentd_package_state: present
 
