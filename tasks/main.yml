@@ -38,7 +38,7 @@
 - name: Configure Fluentd.
   template:
     src: td-agent.conf.j2
-    dest: /lib/systemd/system/td-agent.service
+    dest: /etc/td-agent/td-agent.conf
     owner: "{{ fluentd_user }}"
     group: "{{ fluentd_group }}"
     mode: 0644
