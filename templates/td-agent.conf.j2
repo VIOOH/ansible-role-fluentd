@@ -1,32 +1,60 @@
-[Unit]
-Description=Fluentd
-After=network.target
+  
+# {{ ansible_managed }}
 
-[Service]
-Type=forking
-PIDFile=/run/td-agent/td-agent.pid
-RuntimeDirectory=td-agent
+{% macro make_block(cfg_block) %}
+  type {{ cfg_block.type }}
+{% if cfg_block.params is defined %}
+{{ make_params(cfg_block.params) -}}
+{% endif %}
+{%- endmacro %}
 
-User={{ fluentd_user }}
-Group={{ fluentd_group }}
+{% macro make_params(params_block) %}
+{% for param in params_block %}{% if param.values()[0] is iterable and param.values()[0] is not string %}
+  <{{ param.keys()[0] }}>
+{{ make_params(param.values()[0]) }}
+  </{{ param.keys()[0] }}>
+{% else %}
+  {{ param.keys()[0] }} {{ param.values()[0] }}
+{% endif %}
+{%- endfor %}{%- endmacro %}
 
-[Install]
-WantedBy=multi-user.target
+######
+#### input
+######
+{% for source in fluentd_sources %}
+{% if source.comment is defined %}
+# {{ source.comment }}
+{% endif %}
+<source>
+{{ make_block(source) -}}
+</source>
+{% endfor %}
 
-####
-## Source descriptions:
-##
+######
+#### output
+######
+{% for output in fluentd_matches %}
+{% if output.comment is defined %}
+# {{ output.comment }}
+{% endif %}
+<match {{ output.match }}>
+{{ make_block(output) -}}
+</match>
+{% endfor %}
+# line for format tests
 
-{{ fluentd_conf_sources }}
+######
+#### system
+######
+{% if fluentd_system is defined %}
+<system>
+{{ make_params(fluentd_system) }}
+</system>
+{% endif %}
 
-####
-## Filter descriptions:
-##
-
-{{ fluentd_conf_filters }}
-
-####
-## Match descriptions:
-##
-
-{{ fluentd_conf_matches }}
+######
+#### includes
+######
+{% if fluentd_includes is defined %}{% for i in fluentd_includes %}
+@include {{ i }}
+{% endfor %}{% endif %}
