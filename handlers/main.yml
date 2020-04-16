@@ -1,7 +1,5 @@
 ---
 
 - name: restart fluentd
-  systemd:
-    name: td-agent
-    state: restarted
+  service: name={{ fluentd_service_name }} state=restarted
   when: fluentd_service_state != 'stopped'
